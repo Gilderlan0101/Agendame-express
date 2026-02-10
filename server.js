@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 
 // Importar as rotas
+const router = require('./src/routes/registerUser')
 const listCompanyRoutes = require('./src/routes/list_company');
 
 class Server {
@@ -58,7 +59,10 @@ class Server {
     });
 
     // Listar todas as empresas
+    this.app.use('/api/register/user', router)
     this.app.use('/api/companies', listCompanyRoutes);
+
+
   }
 
   // Documentação
