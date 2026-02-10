@@ -1,0 +1,23 @@
+{
+  "name": "agedame-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "joi": "^18.0.2"
+  },
+  "devDependencies": {
+    "prettier": "3.8.1"
+  }
+}
