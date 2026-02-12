@@ -1,6 +1,6 @@
 const { supabase } = require('../config/database.js');
 const { hashPassword } = require('../utils/passwordHasher.js');
-const { business_hours } = require('../constants/businessDefaults.js')
+const { business_hours } = require('../constants/businessDefaults.js');
 
 class CreateAccount {
   // create_account:
@@ -19,7 +19,7 @@ class CreateAccount {
       try {
         // Hash da senha ANTES de inserir
         const hashedPassword = await hashPassword(this.data['password']);
-        
+
         // Tenta cadastrar um usuário
         const { data, error } = await supabase
           .from('users')
@@ -32,7 +32,7 @@ class CreateAccount {
             phone: this.data['phone'],
             whatsapp: this.data['whatsapp'],
             business_hours: this.data['business_hours'] || business_hours,
-            business_slug: this.data['business_slug']
+            business_slug: this.data['business_slug'],
           })
           .select(); // Adicione .select() para retornar os dados inseridos
 
@@ -40,33 +40,32 @@ class CreateAccount {
           return {
             success: false,
             message: 'Erro ao criar usuário',
-            error: error.message
+            error: error.message,
           };
         }
-        
+
         return {
           success: true,
           message: 'Usuário criado com sucesso',
-          data: data // 'data' contém o usuário criado
+          data: data, // 'data' contém o usuário criado
         };
-
       } catch (error) {
         console.log('Erro ao tentar cadastrar um usuário:', error);
         return {
           success: false,
           message: 'Erro no processo de registro',
-          error: error.message
+          error: error.message,
         };
       }
     }
-    
+
     // Se os dados não forem válidos
     return {
       success: false,
-      message: 'Dados inválidos para registro'
+      message: 'Dados inválidos para registro',
     };
   }
 }
 
 // Exporte CORRETAMENTE
-module.exports = { CreateAccount }; 
+module.exports = { CreateAccount };

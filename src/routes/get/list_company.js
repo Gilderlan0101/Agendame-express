@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-const { supabase } = require('../config/database.js');
-const { route } = require('./registerUser.js');
-const { ListUser } = require('../controllers/llistUser.js')
+const { supabase } = require('../../config/database.js');
 
 router.get('/', async (req, res) => {
   try {
@@ -61,24 +58,5 @@ router.get('/test', (req, res) => {
     supabase: !!supabase,
   });
 });
-
-// Rota para resposável por buscar apenas uma conta
-// e trazer informaçoes do usuario
-router.get('/get/user/:email', async (req, res) =>{
-
-  const targetEmail = req.params.email
-  const instance = new ListUser(targetEmail)
-
-  const result = await instance.searchUser()
-  if (result){
-
-    res.status(200).json({
-      status: 200,
-      data: result
-    })
-  }
-
-  
-})
 
 module.exports = router;

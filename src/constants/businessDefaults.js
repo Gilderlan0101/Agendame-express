@@ -5,9 +5,8 @@ const DEFAULT_BUSINESS_HOURS = {
   thursday: { open: '09:00', close: '18:00' },
   friday: { open: '09:00', close: '18:00' },
   saturday: { open: '09:00', close: '17:00' },
-  sunday: { open: null, close: null }
+  sunday: { open: null, close: null },
 };
-
 
 module.exports = {
   DEFAULT_BUSINESS_HOURS,
