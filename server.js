@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 
 // Importar as rotas
-const router = require('./src/routes/registerUser')
-const listCompanyRoutes = require('./src/routes/list_company');
+const router = require('./src/routes/auth/registerUser');
+const listCompanyRoutes = require('./src/routes/get/list_company');
+const health = require('./src/routes/index');
 
 class Server {
   /*
@@ -39,13 +40,6 @@ class Server {
   // Setup de rotas
   setupRoutes() {
     // Rota de health check
-    this.app.get('/health', (req, res) => {
-      res.json({
-        status: 'healthy',
-        service: this.title,
-        version: this.version,
-      });
-    });
 
     // Rota principal
     this.app.get('/', (req, res) => {
@@ -59,10 +53,10 @@ class Server {
     });
 
     // Listar todas as empresas
-    this.app.use('/api/register/user', router)
+    this.app.use('/api/register/user', router);
     this.app.use('/api/companies', listCompanyRoutes);
-
-
+    // rota: health
+    this.app.use('/api/', health);
   }
 
   // Documentação
